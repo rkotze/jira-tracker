@@ -1,3 +1,9 @@
+import App from "./App.svelte";
+import config from "../jira-config.json"
+
+new App({
+  target: document.getElementById("jira-tracker-app")
+});
 
 async function getCurrentTab() {
   let queryOptions = { active: true, currentWindow: true };
