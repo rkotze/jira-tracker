@@ -20,6 +20,8 @@ Track Jira tickets
 
 [Get started tutorial](https://developer.chrome.com/extensions/getstarted), first step shows how to setup the developer version to test it.
 
+[Jira RestAPI](https://developer.atlassian.com/server/jira/platform/rest-apis/);
+
 
 
 
