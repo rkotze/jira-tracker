@@ -1,0 +1,20 @@
+{
+  "name": "Jira Tracker",
+  "short_name": "Jira Tracker",
+  "version": "1.0",
+  "description": "Easy way to keep track of Jira tickets",
+  "manifest_version": 3,
+  "permissions": [
+    "tabs",
+    "storage",
+    "activeTab",
+    "webNavigation"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "Jira Tracker",
+    "default_popup": "./view/popup.html"
+  }
+}
