@@ -1,3 +1,13 @@
 body {
   width: 400px;
+  background-color: #323;
+  color: #dcd
+}
+
+a:visited, a:link {
+  color: rgb(206, 158, 255);
+}
+
+a:hover {
+  color: rgb(229, 186, 250);;
 }
