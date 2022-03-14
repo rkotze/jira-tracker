@@ -1,6 +1,8 @@
 # Jira tracker
 
-Track Jira tickets
+Track Jira tickets. 
+
+**Disclaimer**: Just a quick hack, might be a little unstable if you decide to use it.
 
 ## Using the extension
 

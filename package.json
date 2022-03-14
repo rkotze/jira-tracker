@@ -7,9 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./build/svelte.js"
   },
-  "keywords": [],
+  "keywords": ["Jira", "chrome extension"],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "esbuild": "^0.14.25",
     "esbuild-svelte": "^0.6.3",
