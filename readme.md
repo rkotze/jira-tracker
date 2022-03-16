@@ -30,7 +30,7 @@ Track Jira tickets.
 - [x] Get Jira data from RestAPI
 - [x] Track Jira ticket by adding from current tab
 - [x] Remove Jira ticket from tracking
-- [ ] Scan all tabs for jira tickets
-- [ ] Sync action to update all tracked tickets
+- [x] Sync action to update all tracked tickets
 - [ ] Copy to clipboard link to jira ticket
+- [ ] Scan all tabs for jira tickets
 - [ ] Embed a add and copy to clipboard action on Jira ticket links.

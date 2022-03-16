@@ -52,7 +52,7 @@ function syncBtn(evt){
   <h3>Tracked: <button on:click={syncBtn}>Sync</button> {fetched}</h3>
   {#each trackedJiras as jira}
     <div class="track-row">
-      <p><a href={`${baseUrl}browse/${jira.key}`}>{jira.key}</a> {jira.status} 
+      <p><a href={`${baseUrl}browse/${jira.key}`} target="_blank">{jira.key}</a> {jira.status} 
         <button data-jira-key={jira.key} on:click={removeBtn}>Remove</button>
       </p>
       <p>{jira.summary}</p>
