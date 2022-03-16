@@ -37,6 +37,12 @@ function syncBtn(evt){
   });
 }
 
+function copyBtn(evt){
+  evt.stopPropagation();
+  const jiraKey = evt.currentTarget.dataset.jiraKey;
+  navigator.clipboard.writeText(`${baseUrl}browse/${jiraKey}`)
+}
+
 </script>
 
 
@@ -54,6 +60,7 @@ function syncBtn(evt){
     <div class="track-row">
       <p><a href={`${baseUrl}browse/${jira.key}`} target="_blank">{jira.key}</a> {jira.status} 
         <button data-jira-key={jira.key} on:click={removeBtn}>Remove</button>
+        <button data-jira-key={jira.key} on:click={copyBtn}>Copy</button>
       </p>
       <p>{jira.summary}</p>
     </div>
