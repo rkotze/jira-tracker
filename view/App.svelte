@@ -2,15 +2,16 @@
 import { currentTab, set, get } from "./jira-browser";
 import { getIssueList, getJira, mapExistingHelper } from "./jira-api";
 import config from "../jira-config.json";
+import { text } from "svelte/internal";
 
 const baseUrl = config.baseUrl;
 const statusColour = {
   "In Progress": "blue",
   "Closed": "green"
 }
-
 let trackedJiras = [];
-let fetched = "";
+let fetchedText = "";
+let copyText = "Copy";
 
 get().then(function(data){
   trackedJiras = data;
@@ -37,15 +38,24 @@ function syncBtn(evt){
   getIssueList(listKeys).then(function(data) {
     trackedJiras = mapExistingHelper(trackedJiras, data);
     set(trackedJiras);
-    fetched = "Sync updated";
-    setTimeout(()=> fetched = "", 3000);
+    toggleText("", "Sync updated", 3000, (txt) => {
+      fetchedText = txt;
+    });
   });
 }
 
 function copyBtn(evt){
   evt.stopPropagation();
   const jiraKey = evt.currentTarget.dataset.jiraKey;
-  navigator.clipboard.writeText(`${baseUrl}browse/${jiraKey}`)
+  navigator.clipboard.writeText(`${baseUrl}browse/${jiraKey}`);
+  toggleText("Copy", "Copied", 1000, (txt) => copyText = txt);
+}
+
+function toggleText(currentText, tempText, delay, hook){
+  hook(tempText);
+  setTimeout(() => {
+    hook(currentText)
+  }, delay);
 }
 
 </script>
@@ -60,14 +70,14 @@ function copyBtn(evt){
       </p> 
     {/if}
   {/await}
-  <h3>Tracked: <button on:click={syncBtn}>Sync</button> {fetched}</h3>
+  <h3>Tracked: <button on:click={syncBtn}>Sync</button> {fetchedText}</h3>
   <p>Count: <span class="status-badge">{trackedJiras.length}</span></p>
   {#each trackedJiras as jira}
     <div class="track-row">
       <p><a href={`${baseUrl}browse/${jira.key}`} target="_blank">{jira.key}</a> 
         
         <button data-jira-key={jira.key} on:click={removeBtn}>Remove</button>
-        <button data-jira-key={jira.key} on:click={copyBtn}>Copy</button>
+        <button data-jira-key={jira.key} on:click={copyBtn}>{copyText}</button>
       </p>
       <p><span class="status-badge {statusColour[jira.status] || ""}">{jira.status}</span> {jira.summary}</p>
     </div>
