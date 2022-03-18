@@ -9,5 +9,17 @@ a:visited, a:link {
 }
 
 a:hover {
-  color: rgb(229, 186, 250);;
+  color: rgb(229, 186, 250);
+}
+
+button {
+  background-color: rgb(206, 158, 255);
+  padding: 2px 8px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgb(229, 186, 250);
 }

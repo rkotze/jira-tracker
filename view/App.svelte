@@ -4,6 +4,11 @@ import { getIssueList, getJira, mapExistingHelper } from "./jira-api";
 import config from "../jira-config.json";
 
 const baseUrl = config.baseUrl;
+const statusColour = {
+  "In Progress": "blue",
+  "Closed": "green"
+}
+
 let trackedJiras = [];
 let fetched = "";
 
@@ -56,19 +61,38 @@ function copyBtn(evt){
     {/if}
   {/await}
   <h3>Tracked: <button on:click={syncBtn}>Sync</button> {fetched}</h3>
+  <p>Count: <span class="status-badge">{trackedJiras.length}</span></p>
   {#each trackedJiras as jira}
     <div class="track-row">
-      <p><a href={`${baseUrl}browse/${jira.key}`} target="_blank">{jira.key}</a> {jira.status} 
+      <p><a href={`${baseUrl}browse/${jira.key}`} target="_blank">{jira.key}</a> 
+        
         <button data-jira-key={jira.key} on:click={removeBtn}>Remove</button>
         <button data-jira-key={jira.key} on:click={copyBtn}>Copy</button>
       </p>
-      <p>{jira.summary}</p>
+      <p><span class="status-badge {statusColour[jira.status] || ""}">{jira.status}</span> {jira.summary}</p>
     </div>
   {/each}
 </div>
 
 <style>
   .track-row {
-    border-bottom: 1px solid #dcd;
+    border: 1px solid rgb(91, 61, 91);
+    border-radius: 4px;
+    padding: 0 4px;
+    margin-bottom: 4px;
+  }
+  .status-badge {
+    display: inline-block;
+    background-color: rgb(91, 61, 91);
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: bold;
+  }
+
+  .status-badge.blue {
+    background-color: rgb(0, 19, 194);
+  }
+  .status-badge.green {
+    background-color: rgb(0, 143, 98);
   }
 </style>
