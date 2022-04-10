@@ -2,7 +2,6 @@
 import { currentTab, set, get } from "./jira-browser";
 import { getIssueList, getJira, mapExistingHelper } from "./jira-api";
 import config from "../jira-config.json";
-import { text } from "svelte/internal";
 
 const baseUrl = config.baseUrl;
 const statusColour = {
@@ -30,6 +29,7 @@ function removeBtn(evt){
   evt.stopPropagation();
   const jiraKey = evt.currentTarget.dataset.jiraKey;
   trackedJiras = trackedJiras.filter((jira) => jira.key !== jiraKey);
+  set(trackedJiras);
 }
 
 function syncBtn(evt){
@@ -46,9 +46,10 @@ function syncBtn(evt){
 
 function copyBtn(evt){
   evt.stopPropagation();
-  const jiraKey = evt.currentTarget.dataset.jiraKey;
+  const target = evt.currentTarget
+  const jiraKey = target.dataset.jiraKey;
   navigator.clipboard.writeText(`${baseUrl}browse/${jiraKey}`);
-  toggleText("Copy", "Copied", 1000, (txt) => copyText = txt);
+  toggleText("Copy", "Copied", 1000, (txt) => target.innerText = txt);
 }
 
 function toggleText(currentText, tempText, delay, hook){

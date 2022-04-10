@@ -7,7 +7,7 @@ async function getCurrentTab() {
 async function currentTab() {
   const tab = await getCurrentTab();
   const curUrl = new URL(tab.url);
-  if(!curUrl.host.includes("jira")){
+  if(!(curUrl.host.includes("jira") && curUrl.pathname.includes("browse"))){
     return{
       isJira: false,
       key: null,
